@@ -13,17 +13,18 @@
 ## Использование
 
 1. Клонировать репозиторий
-
+```sh
 git clone https://github.com/helklema/graphs.git
-
+```
 2. Перейти в папку и установить зависимости
-
+```sh
 cd graphs && npm install
-
+```
 3. Запуск
-
+```sh
 npm start
-
+```
 4. Остановка
-
+```sh
 ctrl + c
+```
