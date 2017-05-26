@@ -3,17 +3,19 @@ const Edge = require('./Edge');
 
 module.exports = Graph;
 
-function Graph(edges, oriented) {
+function Graph(edges, oriented) {//constructor, spisok vershin, bool flag for dejcsrta
+
+
   // context
   const that = this;
 
   // private
   const _edges = oriented ? edges.map(e => new Edge(e.J, e.I, e.C)) : edges;
-  const _nodes = _edges
+  const _nodes = _edges //uzly
     .map(e => e.I)
     .concat(_edges.map(e => e.J))
     .filter((v, i, a) => a.indexOf(v) === i);
-  const edgeBunchList = {};
+  const edgeBunchList = {};//puchki
   _edges.forEach((el, index) => {
     const list = edgeBunchList[el.I] ? edgeBunchList[el.I] : [];
     list.push(index);
@@ -38,7 +40,7 @@ function Graph(edges, oriented) {
     return result;
   }
 
-  function edgeComparerC(edgeA, edgeB) {
+  function edgeComparerC(edgeA, edgeB) { //отсортированные массивы по весу
     return edgeA.C > edgeB.C ? 1 :
       edgeA.C < edgeB.C ? -1 : 0;
   }
@@ -46,10 +48,11 @@ function Graph(edges, oriented) {
   function kruskal() {
     const sortedEdges = _edges.sort(edgeComparerC);
     const resultEdges = [];
-    const color = {};
+    const color = {}; //объект 
 
-    _nodes.forEach((el, index) => {
-      color[el] = index;
+    _nodes.forEach((el, index) => { //el - узел
+      // console.log(`el = ${el}, index = ${index}`);
+      color[el] = index;  //порядковый номер с нуля
     });
 
     for (let i = 0; i < sortedEdges.length; i += 1) {

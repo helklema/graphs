@@ -1,6 +1,6 @@
-const fs = require('fs');
-const open = require('open');
-const static = require('node-static');
+const fs = require('fs'); // filesys module
+const open = require('open'); // браузер
+const static = require('node-static'); // поднимаем статический сервер
 const Graph = require('./Graph');
 const Edge = require('./Edge');
 
@@ -28,9 +28,13 @@ fs.readFile(INPUT_FILE_NAME, 'utf8', (err, data) => {
   print(DFS, graph.depthFirstSearch(3, 10));
   print(DIJKSTRA_BUCKET, graph.dijkstraBucket(3));
   const code = graph.toGraphVizCode();
+  const kruskal = graph.kruskal().toGraphVizCode();
   fs.writeFile('./public/output.viz', code, function (err) {
     if (err) return console.log(err);
-    buildGraph();
+    fs.writeFile('./public/kruskal.viz', kruskal, function(err) {
+      if (err) return console.log(err);
+      buildGraph();
+    });
   });
   console.log('Exit: ctrl + c')
 });
