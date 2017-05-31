@@ -3,7 +3,6 @@ const open = require('open'); // браузер
 const static = require('node-static'); // поднимаем статический сервер
 const Graph = require('./Graph');
 const Edge = require('./Edge');
-// const Heap = require('./Heap');
 
 const INPUT_FILE_NAME = './input/data.list';
 const BFS = 'Алгоритм поиска в ширину';
