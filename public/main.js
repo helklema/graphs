@@ -15,7 +15,7 @@
     }
   }
 
-  client2.open('GET', '/kruskal.viz');
+  client2.open('GET', '/kruskal.viz');  //работает неправильно почему то
   client2.onreadystatechange = function() {
     const code = client.responseText + '';
     if (code !== '') {

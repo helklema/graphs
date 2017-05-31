@@ -1,6 +1,6 @@
 module.exports = Bucket;
 
-function Bucket(count) {
+function Bucket(count) {  //ЧЕРПАКИ, ВСТАВКА, УДАЛЕНИЕ
   const bucket = [];
   for (let k = 0; k < count; k += 1) {
     bucket[k] = [];

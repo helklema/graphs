@@ -3,7 +3,7 @@ const Edge = require('./Edge');
 
 module.exports = Graph;
 
-function Graph(edges, oriented) {//constructor, spisok vershin, bool flag for dejcsrta
+function Graph(edges, oriented) {//констурктор: список вершин и флаг для дейкстры
 
 
   // context
@@ -30,7 +30,7 @@ function Graph(edges, oriented) {//constructor, spisok vershin, bool flag for de
   that.toGraphVizCode = toGraphVizCode;
   that.getEdgeBunch = getEdgeBunch;
 
-  function getEdgeBunch(node) {
+  function getEdgeBunch(node) {  //СПИСКИ ПУЧКОВ ДУГ
     const result = [];
     if (edgeBunchList[node]) {
       edgeBunchList[node].forEach(el => {
@@ -46,13 +46,13 @@ function Graph(edges, oriented) {//constructor, spisok vershin, bool flag for de
   }
 
   function kruskal() {
-    const sortedEdges = _edges.sort(edgeComparerC);
+    const sortedEdges = _edges.sort(edgeComparerC);  //АЛГОРИТМ КРАСКАЛА
     const resultEdges = [];
     const color = {}; //объект 
 
     _nodes.forEach((el, index) => { //el - узел
       // console.log(`el = ${el}, index = ${index}`);
-      color[el] = index;  //порядковый номер с нуля
+      color[el] = index;  //порядковый номер с нуля для сортировки
     });
 
     for (let i = 0; i < sortedEdges.length; i += 1) {
@@ -69,7 +69,7 @@ function Graph(edges, oriented) {//constructor, spisok vershin, bool flag for de
     return new Graph(resultEdges, true);
   }
 
-  function depthFirstSearch(startNode, goalNode) {
+  function depthFirstSearch(startNode, goalNode) {  //ПОИСК В ГЛУБИНУ
     const checked = [];
     let result = false;
     const map = {};
@@ -113,7 +113,7 @@ function Graph(edges, oriented) {//constructor, spisok vershin, bool flag for de
     return result ? map[goalNode] : null;
   }
 
-  function breadthFirstSearch(startNode, goalNode) {
+  function breadthFirstSearch(startNode, goalNode) {  //ПОИСК В ШИРИНУ
     let result = false;
     const checked = [];
     const search = [startNode];
@@ -140,7 +140,7 @@ function Graph(edges, oriented) {//constructor, spisok vershin, bool flag for de
     return result ? map[goalNode] : null;
   }
 
-  function dijkstraBucket(i) {
+  function dijkstraBucket(i) {  //АЛГОРИТМ ДЕЙКСТРЫ НА ЧЕРПАКАХ
     const d = {};
     const map = {};
     const checked = [];
@@ -166,7 +166,7 @@ function Graph(edges, oriented) {//constructor, spisok vershin, bool flag for de
     const bucket = new Bucket(c * _nodes.length);
     bucket.insert(i, 0);
 
-    for (let b = 0; b < bucket.length; b += 1) {
+    for (let b = 0; b < bucket.length; b += 1) {  //черпаки, проверить пустой ли и заполнить его
       while((u = bucket.get(b)) != -1) {
         that.getEdgeBunch(u).forEach(e => {
           if (d[e.J] > d[u] + e.C) {
@@ -187,7 +187,9 @@ function Graph(edges, oriented) {//constructor, spisok vershin, bool flag for de
     return map;
   }
 
-  function toGraphVizCode() {
+
+
+  function toGraphVizCode() {  //для визуализации
     let code = 'digraph {\n';
     _edges.forEach(e => {
       code += `${e.I} -> ${e.J} [ label = "${e.C}" ]; \n`;
